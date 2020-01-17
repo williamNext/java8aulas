@@ -1,36 +1,65 @@
 package br.com.alura.java8.application;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class TesteUsuarioReference {
 
 	public static void main(String[] args) {
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		ArrayList<Curso> cursos = new ArrayList<Curso>();
 		
 		
 		
-		Usuario user = new Usuario("william", 23);
-		Usuario user1 = new Usuario("abreu", 22);
-		Usuario user2 = new Usuario("bartlomeu", 22);
-		Usuario user3 = new Usuario("ze dirceu", 21);
+		Curso user = new Curso("william", 123);
+		Curso user1 = new Curso("abreu", 1555);
+		Curso user2 = new Curso("bartlomeu", 232);
+		Curso user3 = new Curso("ze dirceu", 251);
 		
-		usuarios.add(user);
-		usuarios.add(user1);
-		usuarios.add(user2);
-		usuarios.add(user3);
+		cursos.add(user);
+		cursos.add(user1);
+		cursos.add(user2);
+		cursos.add(user3);
+	
 		
-		usuarios.sort(Comparator.comparing(Usuario::getNome));
-		usuarios.forEach(u ->System.out.println(u.getIdade()+" "+u.getNome()));
-		usuarios.forEach(System.out::println);// tem que alerar o tostring pra isso funcionar
+		cursos.stream()
+		.filter(u -> u.getAlunos() > 100)
+		.map(Curso::getAlunos)
+		.forEach(System.out::println);
 		
-		usuarios.stream()
-		.filter(u -> u.getIdade() > 20)
-		.map(Usuario::getIdade)
-		.forEach(System.out::println);;
+//		classe oprional
+	    cursos.stream().
+		filter(c -> c.getAlunos() >50)
+		.findFirst()
+		.map(Curso::getNome)
+		.ifPresent(System.out::println);
 		
+//	pesquisar sobre a a classe optional e seus métodos
+	    
+	    
+//	    usando collectors para tranformar o resultado dos filtros em lista
+//	    pesquisa sobre collectors
+//	    da pra usar map tbm
+//	    PARALLELSTREAM FAZ TRABALHAR EM ARALELO IMPORTANTE PARA CONJUTOS GRANDES
+	    
+	    ArrayList<Curso> u = (ArrayList <Curso>) cursos.stream().
+		filter(c -> c.getAlunos() >150)
+		.collect(Collectors.toList());
+	    
+	    u.forEach(s -> System.out.println(s.getAlunos()));
+	    
+	    // assim ele filtra a lista e retorna pra ela mesma
+	    cursos = (ArrayList<Curso>) cursos.stream().
+	    		filter(c -> c.getAlunos() >150)
+	    		.collect(Collectors.toList());
+	    	    
+	    
+	    
 	}
 	
 	

@@ -1,14 +1,14 @@
 package br.com.alura.java8.application;
 
-public class Usuario {
+public class Curso {
 	private String nome;
-	private int idade;
+	private int alunos;
 
 	
 	
-	public Usuario(String nome, int idade) {
+	public Curso(String nome, int alunos) {
 		this.nome = nome;
-		this.idade = idade;
+		this.alunos = alunos;
 	}
 	
 	public String getNome() {
@@ -18,11 +18,11 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getIdade() {
-		return idade;
+	public int getAlunos() {
+		return alunos;
 	}
 	public void setIdade(int idade) {
-		this.idade = idade;
+		this.alunos = idade;
 	}
 
 	
